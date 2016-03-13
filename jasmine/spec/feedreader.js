@@ -84,7 +84,7 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial entries', function() {
-
+        // Wait for loadFeed's callback before each spec
         beforeEach(function(done) {
             window.loadFeed(0, function() {
                 done();
@@ -98,13 +98,14 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
             it('have at least a single .entry element within the .feed container.', function(done) {
-                expect($('.entry')).toBeDefined();
+                // Test the length, instead its existence, for a more accurate result
+                expect($('.entry').length).toBeGreaterThan(0);
                 done();
             });
 
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
