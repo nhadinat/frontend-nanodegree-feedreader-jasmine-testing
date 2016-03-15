@@ -106,6 +106,7 @@ $(function() {
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New feed selection', function() {
+        // Capture the initial value for comparison reasons
         var entryZero = $('.entry');
         console.log(entryZero);
 
