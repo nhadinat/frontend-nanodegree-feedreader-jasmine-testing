@@ -33,7 +33,8 @@ $(function() {
          */
         it('have URLs', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.url).toBeDefined();
+                expect(feed.url).toBeDefined(); // URL is defined
+                expect(feed.url.length).not.toEqual(0); // URL is not empty
             });
         });
 
