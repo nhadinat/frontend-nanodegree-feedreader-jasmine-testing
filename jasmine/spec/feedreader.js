@@ -46,6 +46,7 @@ $(function() {
         it('have names', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toEqual(0); // URL is not empty
             });
         });
 
@@ -75,10 +76,10 @@ $(function() {
         it('changes visibility when the menu icon is clicked', function() {
             // Click open
             menuIcon.trigger('click');
-            expect($('body').hasClass('menu-hidden')).toBeTruthy();
+            expect($('body').hasClass('menu-hidden')).toBeFalsy();
             // Click close
             menuIcon.trigger('click');
-            expect($('body').hasClass('menu-hidden')).toBeFalsy();
+            expect($('body').hasClass('menu-hidden')).toBeTruthy();
         });
 
     });
@@ -136,8 +137,6 @@ $(function() {
          */
         it('is loaded by the loadFeed function on change', function() {
             // Test existence
-            expect(entryOne).toBeDefined();
-            expect(entryZero).toBeDefined();
             expect(entryOne).toBeTruthy();
             expect(entryZero).toBeTruthy();
             // Test difference
