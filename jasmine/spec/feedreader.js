@@ -98,22 +98,34 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('have at least a single .entry element within the .feed container.', function(done) {
+        it('have at least a single .entry element within the .feed container.', function() {
             // Test the length, instead its existence, for a more accurate result
             expect($('.entry').length).toBeGreaterThan(0);
-            done();
         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New feed selection', function() {
-        // Capture the initial value for comparison reasons
-        var entryZero = $('.entry');
-        console.log(entryZero);
+        // Declare entry one and zero ahead of time
+        var entryOne,
+            entryZero;
 
         // Wait for loadFeed's callback before each spec
         beforeEach(function(done) {
+            window.loadFeed(0, function() {
+                entryZero = $('.entry').html();
+                console.log(entryZero);
+                console.log('loadFeed 0');
+                done();
+            });
+        });
+
+        // Again, qait for loadFeed's callback before each spec, this time a different feed
+        beforeEach(function(done) {
             window.loadFeed(1, function() {
+                entryOne = $('.entry').html();
+                console.log(entryOne);
+                console.log('loadFeed 1');
                 done();
             });
         });
@@ -122,11 +134,14 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it('is loaded by the loadFeed function on change', function(done) {
-            var entryOne = $('.entry');
-            console.log(entryOne);
+        it('is loaded by the loadFeed function on change', function() {
+            // Test existence
+            expect(entryOne).toBeDefined();
+            expect(entryZero).toBeDefined();
+            expect(entryOne).toBeTruthy();
+            expect(entryZero).toBeTruthy();
+            // Test difference
             expect(entryZero).not.toBe(entryOne);
-            done();
         });
 
     });
